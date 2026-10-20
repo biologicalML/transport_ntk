@@ -15,15 +15,15 @@ variance minimization under that kernel.
 
 ## Main idea: the transport NTK
 
-A conditional pushforward model $T_\theta(x, c)$ maps a source sample
-$x \sim \mu$ to a sample of the target distribution $\nu_c$ of condition $c$.
+A conditional pushforward model $T_\theta(y, x)$ maps a source sample
+$y \sim \nu$ to a sample of the target distribution $\mu_x$ of condition $x$.
 Kernel-based active learning normally uses the NTK of a network that predicts
 one summary of each condition, typically its mean, so two conditions look
 similar when their predicted means are similar. The tNTK instead compares the
 whole transport map, averaged over the source distribution:
 
 $$
-k_\theta^\mathrm{tNTK}(x, x') = \int \operatorname{Tr}\left[D_\theta T_{\theta}(x)(y)^\top D_\theta T_{\theta}(x')(y)\right]d\nu(y).
+k_\theta^\mathrm{tNTK}(x, x') = \int \mathrm{Tr}\left[D_\theta T_{\theta}(x)(y)^\top D_\theta T_{\theta}(x')(y)\right]d\nu(y).
 $$
 
 It needs one forward pass per condition and no extra training. Each model
@@ -32,7 +32,7 @@ family supplies its own $\phi$:
 | family | feature $\phi(y, x)$ | code |
 |---|---|---|
 | conditional Monge | last hidden layer of the Monge map, on every source cell | [`get_grad_kernel_matrix`](train/al_train_cmonge.py#L40) |
-| conditional flow matching | velocity-field features integrated along the ODE trajectory, $\int_0^1 \phi(x_t, t, c)\,dt$, solved jointly with the flow (Tsit5) | [`_compute_trajectory_grads`](train/al_train_cflow.py#L241), [`get_grad_kernel_matrix`](train/al_train_cflow.py#L296) |
+| conditional flow matching | velocity-field features integrated along the ODE trajectory, $\int_0^1 \phi(y_t, t, x)\,dt$, solved jointly with the flow (Tsit5) | [`_compute_trajectory_grads`](train/al_train_cflow.py#L241), [`get_grad_kernel_matrix`](train/al_train_cflow.py#L296) |
 | conditional quantile network | Jacobian of all predicted quantiles w.r.t. the output-layer parameters (the source is the set of quantile levels) | [`get_grad_kernel_matrix`](train/al_train_quantile.py#L826) |
 
 

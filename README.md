@@ -1,6 +1,6 @@
-# Transport Neural Tangent Kernel (tNTK) for active learning of generative models
+# Transport Neural Tangent Kernel (tNTK)
 
-Reproducibility package for tNTK for active learning (Ryu et al., NeurIPS 2026).
+Transport Neural Tangent Kernel (tNTK) for active learning of generative models (Ryu et al., NeurIPS 2026).
 
 Many experiments measure a whole *distribution* per condition: a population of
 cells per perturbation, a set of sentence embeddings per intent, a spread of
@@ -10,8 +10,8 @@ expensive to measure, the question is **which conditions to measure next**.
 
 This repository implements the answer from the paper: score candidate
 conditions with the **transport neural tangent kernel (tNTK)**, the tangent
-kernel of the model's conditional transport map, and acquire them by **total
-variance minimization (`minvar`)** under that kernel.
+kernel of the model's conditional transport map, and acquire them by total
+variance minimization under that kernel.
 
 ## Main idea: the transport NTK
 

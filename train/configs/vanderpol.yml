@@ -1,0 +1,73 @@
+# Camera-ready config for `vanderpol`, ported from al_vanderpolstdn_s.yml with the data
+# and embedding paths rewritten to this package's ./data/vanderpol/.
+# vanderpolstdn = vanderpolstd's condition embedding with four PURE-NOISE
+# dimensions appended (built by
+# scripts/temp_scripts/build_vanderpolstd_embeddings.py).
+#
+#   e' = minmax( [ standardize(mu, cx, cy, sigma) | standardize(iid N(0,1)) ] )
+#
+# Dims 0-3 are byte-for-byte vanderpolstd's standardized (mu, cx, cy, sigma).
+# Dims 4-7 are a frozen iid Gaussian draw (seed 1940, chosen so the worst |corr|
+# across all 16 (noise dim, generative param) pairs is 0.080) -- they carry no
+# information about any condition's target distribution.
+#
+# Four noise dims, not two: that puts half the covariate variance in the
+# distractor, matching ring2stdn's signal:noise split (2+2) rather than its
+# dimension count, so a selector is stressed about equally hard on both.
+#
+# All eight columns are standardized to unit spread before a single global
+# min-max, so the distractor carries exactly as much variance as each real
+# dimension: a Euclidean distance in embedding space weights them equally.
+#
+# Data is unchanged (vanderpol.h5ad), so every per-condition target distribution
+# is identical to vanderpol / vanderpolstd. Compare against vanderpolstd, NOT
+# against plain vanderpol -- the latter also differs by the standardization.
+model:
+  method: monge
+
+  fitting_loss:
+    name: sinkhorn
+
+  regularizer:
+    name: monge
+    kwargs:
+      cost: euclidean
+
+  optim:
+    lr: 1.0e-2
+    name: adamw
+    grad_acc_steps: 100
+    kwargs:
+      weight_decay: 1.0e-5
+
+  mlp:
+    dim_hidden: [64, 64, 32]
+    dim_data: 2
+    context_entity_bonds:
+    - [0, 8]
+    dim_cond: 8
+    dim_cond_map: 8
+
+  embedding:
+    name: moa
+    model_dir: ./data/vanderpol/
+    checkpoint: true
+    dose_split: false
+
+  num_train_iters: 100
+  seed: 42
+
+
+data:
+   name: vanderpol
+   file_path: ./data/vanderpol/vanderpol.h5ad
+   batch_size: 256
+   split: [0.8, 0.2, 0.0]
+   drug_col: condition
+   drug_condition: cond0
+   control_condition: control
+   seed: 42
+
+condition:
+  mode: extrapolate
+  split: [0.8, 0.2, 0.0]

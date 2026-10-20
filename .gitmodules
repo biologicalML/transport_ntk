@@ -1,0 +1,8 @@
+[submodule "extern/CellFlow-al"]
+	path = extern/CellFlow-al
+	url = https://github.com/jykr/CellFlow-al.git
+	branch = transport_ntk
+[submodule "extern/cmonge-al"]
+	path = extern/cmonge-al
+	url = https://github.com/jykr/cmonge-al.git
+	branch = transport_ntk

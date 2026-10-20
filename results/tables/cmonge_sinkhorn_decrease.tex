@@ -1,0 +1,37 @@
+% NeurIPS 2026 camera-ready version (Random, NTK, tNTK; all acquired with minvar).
+% Built by scripts/build_all_summaries.py --preset cmonge_rf_ntk_tntk
+\begin{table}[ht]
+\centering
+\small
+\caption{Sinkhorn divergence decrease vs.\ iter 0 (mean $\pm$ stderr across fold$\times$seed; units $10^{-3}$; Columns show $B_0 + B$).}
+\label{tab:sinkhorn_dec_rf_ntk_tntk_v3}
+\begin{tabular}{llccc}
+\toprule
+Dataset & Strategy & \multicolumn{3}{c}{$B_0 + B$} \\
+\midrule
+\multirow{8}{*}{K562-Chemical} & & 10 + 1 & 10 + 5 & 20 + 5 \\
+\cmidrule(lr){3-5}
+ & Random & $\mathbf{-9.56 \pm 0.88}$ & $-29.06 \pm 1.38$ & $-15.27 \pm 0.89$ \\
+ & NTK & $-9.33 \pm 0.99$ & $\mathbf{-30.44 \pm 1.56}$ & $-20.04 \pm 1.50$ \\
+ & tNTK & $-8.65 \pm 1.24$ & $-30.26 \pm 1.85$ & $\mathbf{-21.00 \pm 1.58}$ \\
+\cmidrule(lr){2-5}
+ & & 20 + 10 & 30 + 5 & 30 + 10 \\
+\cmidrule(lr){3-5}
+ & Random & $-24.14 \pm 1.36$ & $-10.70 \pm 1.04$ & $-17.19 \pm 1.37$ \\
+ & NTK & $-30.86 \pm 1.51$ & $-17.57 \pm 1.71$ & $-25.53 \pm 1.85$ \\
+ & tNTK & $\mathbf{-31.63 \pm 1.52}$ & $\mathbf{-19.30 \pm 1.77}$ & $\mathbf{-26.13 \pm 1.83}$ \\
+\midrule
+\multirow{8}{*}{BMDM-Genetic} & & 10 + 1 & 10 + 5 & 20 + 5 \\
+\cmidrule(lr){3-5}
+ & Random & $-23.67 \pm 4.69$ & $-98.81 \pm 7.15$ & $-67.70 \pm 6.45$ \\
+ & NTK & $\mathbf{-38.16 \pm 5.79}$ & $-127.30 \pm 7.54$ & $-92.80 \pm 6.48$ \\
+ & tNTK & $-32.01 \pm 4.70$ & $\mathbf{-130.46 \pm 7.83}$ & $\mathbf{-102.63 \pm 7.20}$ \\
+\cmidrule(lr){2-5}
+ & & 20 + 10 & 30 + 5 & 30 + 10 \\
+\cmidrule(lr){3-5}
+ & Random & $-111.13 \pm 8.26$ & $-48.73 \pm 4.70$ & $-79.70 \pm 6.43$ \\
+ & NTK & $-130.32 \pm 7.63$ & $-54.90 \pm 4.57$ & $-90.86 \pm 6.35$ \\
+ & tNTK & $\mathbf{-144.90 \pm 8.46}$ & $\mathbf{-70.59 \pm 5.34}$ & $\mathbf{-106.25 \pm 6.49}$ \\
+\bottomrule
+\end{tabular}
+\end{table}

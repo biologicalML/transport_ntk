@@ -1,0 +1,51 @@
+# Camera-ready config for `sim_mixture`, ported from al_sim_mixture_a5.yml with the data
+# and embedding paths rewritten to this package's ./data/sim_mixture/.
+model:
+  method: monge
+
+  fitting_loss:
+    name: sinkhorn
+
+  regularizer:
+    name: monge
+    kwargs:
+      cost: euclidean
+
+  optim:
+    lr: 1.0e-2
+    name: adamw
+    grad_acc_steps: 100
+    kwargs:
+      weight_decay: 1.0e-5
+
+  mlp:
+    dim_hidden: [64, 64, 32]
+    dim_data: 1
+    context_entity_bonds:
+    - [0, 9]
+    dim_cond: 9
+    dim_cond_map: 9
+
+  embedding:
+    name: moa
+    model_dir: ./data/sim_mixture/
+    checkpoint: true
+    dose_split: false
+
+  num_train_iters: 100
+  seed: 42
+
+
+data:
+   name: sim_mixture_a5
+   file_path: ./data/sim_mixture/sim_mixture.h5ad
+   batch_size: 256
+   split: [0.8, 0.2, 0.0]
+   drug_col: condition
+   drug_condition: cond0001
+   control_condition: CTRL
+   seed: 42
+
+condition:
+  mode: extrapolate
+  split: [0.8, 0.2, 0.0]

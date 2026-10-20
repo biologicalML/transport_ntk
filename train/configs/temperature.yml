@@ -1,0 +1,51 @@
+# Camera-ready config for `temperature`, ported from al_temps_s.yml with the data
+# and embedding paths rewritten to this package's ./data/temperature/.
+model:
+  method: monge
+
+  fitting_loss:
+    name: sinkhorn
+
+  regularizer:
+    name: monge
+    kwargs:
+      cost: euclidean
+
+  optim:
+    lr: 1.0e-2
+    name: adamw
+    grad_acc_steps: 100
+    kwargs:
+      weight_decay: 1.0e-5
+
+  mlp:
+    dim_hidden: [64, 64, 32]
+    dim_data: 1
+    context_entity_bonds:
+    - [0,3] # [0, 194], [0, 195] for RDKit
+    dim_cond: 3 # geographic moa: LONGITUDE/LATITUDE/ELEVATION (see moa_geo/)
+    dim_cond_map: 3
+
+  embedding:
+    name: moa
+    model_dir: ./data/temperature/
+    checkpoint: true
+    dose_split: false
+
+  num_train_iters: 100
+  seed: 42
+  
+
+data:
+   name: temperature
+   file_path: ./data/temperature/temperature.h5ad
+   batch_size: 240
+   split: [0.8, 0.2, 0.0]
+   drug_col: station
+   drug_condition: s1009099999
+   control_condition: CTRL
+   seed: 42
+
+condition: 
+  mode: extrapolate
+  split: [0.8, 0.2, 0.0]

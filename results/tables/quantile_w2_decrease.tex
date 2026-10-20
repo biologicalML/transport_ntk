@@ -1,0 +1,32 @@
+\begin{table}[ht]
+\centering
+\small
+\caption{$W_2$ distance decrease vs.\ iter 0, minvar (total variance minimization) batch selection (mean $\pm$ stderr across fold$\times$seed; units $10^{-3}$; Columns show $B_0 + B$).}
+\label{tab:quantile_minvar_w2_dec_v3}
+\begin{tabular}{llccc}
+\toprule
+Dataset & Strategy & 5 + 1 & 5 + 5 & 10 + 1 \\
+\midrule
+\multirow{6}{*}{Simulated Gaussian mixture} & Random & $-296.12 \pm 16.95$ & $-609.61 \pm 20.00$ & $-121.02 \pm 10.25$ \\
+ & NTK & $-416.43 \pm 17.83$ & $-685.12 \pm 20.35$ & $-168.28 \pm 10.52$ \\
+ & NTK (mean-var) & $-367.99 \pm 17.91$ & $-686.29 \pm 20.12$ & $-162.85 \pm 10.25$ \\
+ & NTK (quartile) & $-388.93 \pm 17.96$ & $-681.29 \pm 20.01$ & $-176.86 \pm 10.88$ \\
+ & BALSA-EMD & $-332.16 \pm 18.02$ & $-552.52 \pm 20.18$ & $-133.59 \pm 11.21$ \\
+ & tNTK & $\mathbf{-429.52 \pm 18.67}$ & $\mathbf{-695.82 \pm 19.96}$ & $\mathbf{-205.01 \pm 11.66}$ \\
+\midrule
+\multirow{6}{*}{Temperature} & Random & $-89.04 \pm 11.88$ & $-219.96 \pm 12.30$ & $-41.02 \pm 6.78$ \\
+ & NTK & $-185.55 \pm 12.30$ & $-255.65 \pm 12.72$ & $-84.57 \pm 8.43$ \\
+ & NTK (mean-var) & $-186.51 \pm 12.64$ & $-258.48 \pm 12.83$ & $-86.88 \pm 8.30$ \\
+ & NTK (quartile) & $-182.63 \pm 12.68$ & $-255.01 \pm 13.08$ & $-88.36 \pm 8.37$ \\
+ & BALSA-EMD & $-155.37 \pm 11.98$ & $-199.14 \pm 13.22$ & $-71.14 \pm 8.19$ \\
+ & tNTK & $\mathbf{-189.94 \pm 12.66}$ & $\mathbf{-267.93 \pm 12.82}$ & $\mathbf{-89.84 \pm 8.43}$ \\
+\midrule
+\multirow{6}{*}{Dew Point} & Random & $-79.90 \pm 12.62$ & $-280.77 \pm 16.36$ & $-76.55 \pm 9.56$ \\
+ & NTK & $-178.44 \pm 13.63$ & $-364.19 \pm 16.25$ & $-158.94 \pm 10.25$ \\
+ & NTK (mean-var) & $-172.47 \pm 12.99$ & $-372.49 \pm 15.80$ & $-159.24 \pm 9.67$ \\
+ & NTK (quartile) & $-173.21 \pm 13.38$ & $-375.47 \pm 16.54$ & $-158.70 \pm 10.34$ \\
+ & BALSA-EMD & $-79.51 \pm 12.98$ & $-178.00 \pm 15.34$ & $-124.13 \pm 9.63$ \\
+ & tNTK & $\mathbf{-221.18 \pm 13.53}$ & $\mathbf{-442.25 \pm 16.24}$ & $\mathbf{-212.74 \pm 10.44}$ \\
+\bottomrule
+\end{tabular}
+\end{table}

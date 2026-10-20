@@ -1,0 +1,25 @@
+% NeurIPS 2026 camera-ready version (Random, NTK, tNTK; all acquired with minvar).
+% Built by scripts/build_all_summaries_legacy.py --preset cflow_rf_ntk_tntk
+\begin{table}[ht]
+\centering
+\small
+\caption{Sinkhorn divergence decrease vs.\ iter 0 (mean $\pm$ stderr across fold$\times$seed; units $10^{-3}$; Columns show $B_0 + B$).}
+\label{tab:cflow_ring2_rf_ntk_tntk_sinkhorn_dec_v3}
+\begin{tabular}{llccc}
+\toprule
+Dataset & Strategy & 5 + 1 & 5 + 5 & 10 + 5 \\
+\midrule
+\multirow{3}{*}{Radial flow} & Random & $-17.70 \pm 4.45$ & $-40.24 \pm 5.82$ & $-24.60 \pm 5.05$ \\
+ & NTK & $-26.71 \pm 6.78$ & $-43.07 \pm 6.43$ & $-24.24 \pm 5.34$ \\
+ & tNTK & $\mathbf{-35.50 \pm 4.62}$ & $\mathbf{-53.55 \pm 5.96}$ & $\mathbf{-38.39 \pm 5.30}$ \\
+\midrule
+\multirow{3}{*}{Van der Pol oscillator} & Random & $-121.87 \pm 27.79$ & $-336.33 \pm 37.85$ & $-171.39 \pm 27.39$ \\
+ & NTK & $-196.36 \pm 26.90$ & $-408.15 \pm 45.54$ & $-220.98 \pm 30.47$ \\
+ & tNTK & $\mathbf{-200.73 \pm 32.65}$ & $\mathbf{-441.51 \pm 35.19}$ & $\mathbf{-259.98 \pm 36.20}$ \\
+\midrule
+\multirow{3}{*}{CLINC 150} & Random & $-350.07 \pm 70.04$ & $-883.23 \pm 116.94$ & $-436.98 \pm 98.21$ \\
+ & NTK & $-306.01 \pm 86.09$ & $\mathbf{-884.02 \pm 122.86}$ & $-480.66 \pm 94.45$ \\
+ & tNTK & $\mathbf{-672.85 \pm 83.60}$ & $-852.31 \pm 134.61$ & $\mathbf{-580.94 \pm 101.73}$ \\
+\bottomrule
+\end{tabular}
+\end{table}

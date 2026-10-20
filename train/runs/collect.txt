@@ -1,0 +1,27 @@
+# Aggregate finished runs into results/<family>/<dataset>/<prefix>/metrics_<dataset>_size<B>.csv,
+# then build the tables, panels and paired tests from those CSVs.
+#
+# conditional Monge
+python eval/collect_results_cmonge.py k562 1 --prefix=cameraready_ib10 --max_iter 5 --incomplete
+python eval/collect_results_cmonge.py k562 5 --prefix=cameraready_ib10 --max_iter 5 --incomplete
+python eval/collect_results_cmonge.py k562 5 --prefix=cameraready_ib20 --max_iter 5 --incomplete
+python eval/collect_results_cmonge.py k562 10 --prefix=cameraready_ib20 --max_iter 5 --incomplete
+python eval/collect_results_cmonge.py k562 5 --prefix=cameraready_ib30 --max_iter 5 --incomplete
+python eval/collect_results_cmonge.py k562 10 --prefix=cameraready_ib30 --max_iter 5 --incomplete
+# ... the same six lines with `bmdm` in place of `k562`
+#
+# conditional flow matching (model-config-id must match the runs: `l`)
+python eval/collect_results_cflow.py radial 1 --prefix=cameraready_ib5_c --max_iter 3 --model-config-id=l --incomplete
+python eval/collect_results_cflow.py radial 5 --prefix=cameraready_ib5_c --max_iter 3 --model-config-id=l --incomplete
+python eval/collect_results_cflow.py radial 5 --prefix=cameraready_ib10_c --max_iter 3 --model-config-id=l --incomplete
+# ... the same three lines for `vanderpol`, and for `clinc150` with `--lr-patience 5`
+# added (its runs are trained with it and carry the `_lrp5` tag)
+#
+# conditional quantile networks (prefix carries the model id and weight decay)
+python eval/collect_results_quantile.py dewpoint 1 --prefix=Quantile:scameraready_ib5_wd0.0001 --max-iter 5 --incomplete
+python eval/collect_results_quantile.py dewpoint 5 --prefix=Quantile:scameraready_ib5_wd0.0001 --max-iter 5 --incomplete
+python eval/collect_results_quantile.py dewpoint 1 --prefix=Quantile:scameraready_ib10_wd0.1 --max-iter 5 --incomplete
+# ... see train/runs/grid.py QUANTILE["datasets"] for each dataset's (model id, weight decay)
+#
+# tables + panels + paired tests for all three families
+python eval/build_summaries.py --all --out results/summary

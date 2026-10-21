@@ -2,11 +2,21 @@
 
 Transport Neural Tangent Kernel (tNTK) for active learning of generative models (Ryu et al., NeurIPS 2026).
 
-Many experiments measure a whole *distribution* per condition: a population of
+Many experiments measure a whole *distribution* per condition; e.g. a population of
 cells per perturbation, a set of sentence embeddings per intent, a spread of
 temperatures per location. A conditional generative model learns to push a
-source distribution onto each condition's target. When every condition is
-expensive to measure, the question is **which conditions to measure next**.
+source distribution onto each condition's target. 
+
+$$
+\begin{align}
+x \in \mathcal{X} \qquad \text{Conditions} \\
+(x, \mu_x) \qquad \text{Data sample} \\
+\mu_\theta(x) = (T_\theta(x))_{\\#}\nu \qquad \text{Model}
+\end{align}
+$$
+
+When every condition is
+expensive to measure, the question is **which conditions to measure next** (deciding $x$ to obtain $\mu_x$ for).
 
 This repository implements the answer from the paper: score candidate
 conditions with the **transport neural tangent kernel (tNTK)**, the tangent
